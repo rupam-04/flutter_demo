@@ -1,10 +1,18 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/utils/routes.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String name = "";
+  bool changeButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,7 @@ class LoginPage extends StatelessWidget {
           children: [
             Image.asset("assets/images/login_image.png", fit: BoxFit.cover,),
             SizedBox(height: 20,), // for spacing
-            Text("Welcome", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+            Text("Welcome $name", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
             SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
@@ -25,6 +33,10 @@ class LoginPage extends StatelessWidget {
                   hintText: "Enter Username",
                   labelText: "Username",
                 ),
+                onChanged: (value) {
+                  name = value;
+                  setState(() {}); //this calls the build function
+                },
               ),
               SizedBox(height: 20,),
               TextFormField(
@@ -35,13 +47,45 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40,),
-              ElevatedButton(
-                child: Text("Login"),
-                style: TextButton.styleFrom(minimumSize: Size(150, 40)),
-                onPressed: () {
+
+              InkWell(
+                onTap: () async {
+                  setState(() {
+                    changeButton = true;
+                  });
+                  await Future.delayed(Duration(seconds: 1)); //wait 1 sec
                   Navigator.pushNamed(context, MyRoutes.homeRoute); //if you press back after this it goes back to login page which is basically pop()
                 },
-                )
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  width: changeButton? 50: 150, //ternary
+                  height: 50, 
+                  // color: Colors.deepPurple,
+                  alignment: Alignment.center,
+                  child: changeButton? Icon(Icons.done, color: Colors.white,):
+                  Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple, 
+                    // shape: changeButton? BoxShape.circle: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(changeButton? 50: 8),
+                  ),
+                ),
+              ) // can transform container to a button
+
+              // ElevatedButton(
+              //   child: Text("Login"),
+              //   style: TextButton.styleFrom(minimumSize: Size(150, 40)),
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, MyRoutes.homeRoute); //if you press back after this it goes back to login page which is basically pop()
+              //   },
+              //   )
               ],),
             ),
           ],
