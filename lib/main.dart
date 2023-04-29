@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
       // home: HomePage(),
       themeMode: ThemeMode.light,
       theme: ThemeData(primarySwatch: Colors.deepPurple, fontFamily: GoogleFonts.lato().fontFamily), //doing change here applies to whole app
-      // debugShowCheckedModeBanner: false, //removes the debug banner
+      debugShowCheckedModeBanner: false, //removes the debug banner
       darkTheme: ThemeData(brightness: Brightness.dark),
-      initialRoute: "/",
+      initialRoute: MyRoutes.homeRoute,
       routes: {
         "/": (context) => const LoginPage(),
         MyRoutes.homeRoute: (context) => const HomePage(),

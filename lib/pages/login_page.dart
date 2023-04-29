@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async { // async is reqd for await
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) { //if username ans pwd are not empty
       setState(() {
         changeButton = true;
       });
