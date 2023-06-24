@@ -14,7 +14,7 @@ class MyTheme {
       titleTextStyle: TextStyle(
         color: Colors.black,
         fontFamily: GoogleFonts.lato().fontFamily,
-        fontSize: 18,
+        fontSize: 19,
       ),
     )
   );
