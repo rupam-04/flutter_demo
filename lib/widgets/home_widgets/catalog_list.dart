@@ -71,7 +71,7 @@ class CatalogItem extends StatelessWidget {
           ))
         ],
       ), // py16() is padding from top and bottom
-    ).white.roundedLg.square(150).make().py16(); // py16() is padding from top and bottom
+    ).white.roundedLg.square(150).make().py12(); // py16() is padding from top and bottom
   }
 }
 
