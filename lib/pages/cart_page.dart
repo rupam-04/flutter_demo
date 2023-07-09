@@ -39,7 +39,13 @@ class _CartTotal extends StatelessWidget {
           "\$9999".text.xl3.bold.color(Colors.black).make(),
           30.widthBox,
           ElevatedButton(
-            onPressed: () {}, 
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: "Buying not supported yet".text.make(),
+                )
+              );
+            }, 
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(MyTheme.darkBluishColor),
               shape: MaterialStateProperty.all(StadiumBorder())
@@ -56,7 +62,7 @@ class _CartList extends StatefulWidget {
   const _CartList({super.key});
 
   @override
-  State<_CartList> createState() => __CartListState();
+  State<_CartList> createState() => _CartListState();
 }
 
 class _CartListState extends State<_CartList> {
