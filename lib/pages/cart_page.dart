@@ -59,7 +59,7 @@ class _CartList extends StatefulWidget {
   State<_CartList> createState() => __CartListState();
 }
 
-class __CartListState extends State<_CartList> {
+class _CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
