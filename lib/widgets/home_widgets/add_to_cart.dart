@@ -6,23 +6,16 @@ import '../../models/cart.dart';
 import '../../models/catalog.dart';
 import '../themes.dart';
 
-class AddToCart extends StatefulWidget {
+class AddToCart extends StatelessWidget {
   final Item catalog;
-  const AddToCart({
+  AddToCart({
     super.key, required this.catalog,
   });
 
-  @override
-  State<AddToCart> createState() => _AddToCartState();
-}
-
-class _AddToCartState extends State<AddToCart> {
-  
   final _cart = CartModel();
-
   @override
   Widget build(BuildContext context) {
-    bool isInCart = _cart.items.contains(widget.catalog)? true : false;
+    bool isInCart = _cart.items.contains(catalog)? true : false;
     return ElevatedButton(
       onPressed: () {
         isInCart = !isInCart;
@@ -36,7 +29,7 @@ class _AddToCartState extends State<AddToCart> {
               content: "Item added to cart".text.make(),
             )
           );
-          _cart.add(widget.catalog);
+          _cart.add(catalog);
         }
         else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -44,17 +37,16 @@ class _AddToCartState extends State<AddToCart> {
               content: "Item removed from cart".text.make(),
             )
           );
-          _cart.remove(widget.catalog);
+          _cart.remove(catalog);
         }
-        setState(() {});
       },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(
           MyTheme.darkBluishColor
         ),
-        shape: MaterialStateProperty.all(StadiumBorder())
+        shape: MaterialStateProperty.all(const StadiumBorder())
       ),
-      child: isInCart? Icon(Icons.done) : Icon(CupertinoIcons.cart_badge_plus)
+      child: isInCart? const Icon(Icons.done) : const Icon(CupertinoIcons.cart_badge_plus)
     );
   }
 }

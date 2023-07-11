@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/widgets/themes.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../models/cart.dart';
@@ -21,8 +19,8 @@ class CartPage extends StatelessWidget {
       body: Column(
         children: [
           _CartList().p32().expand(),
-          Divider(),
-          _CartTotal(),
+          const Divider(),
+          const _CartTotal(),
         ],
       ),
     );
@@ -30,7 +28,7 @@ class CartPage extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  const _CartTotal({super.key});
+  const _CartTotal();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class _CartTotal extends StatelessWidget {
             }, 
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(MyTheme.darkBluishColor),
-              shape: MaterialStateProperty.all(StadiumBorder())
+              shape: MaterialStateProperty.all(const StadiumBorder())
             ),
             child: "Buy".text.color(Colors.white).make().px4().py2()
           ).w24(context)
@@ -62,27 +60,19 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({super.key});
-
-  @override
-  State<_CartList> createState() => _CartListState();
-}
-
-class _CartListState extends State<_CartList> {
+class _CartList extends StatelessWidget {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return _cart.items.isEmpty? "Nothing to show here".text.makeCentered(): ListView.builder(
       itemCount: _cart.items.length,
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
+        leading: const Icon(Icons.done),
         trailing: IconButton(
           onPressed: () {
             _cart.remove(_cart.items[index]);
-            setState(() {});
           }, 
-          icon: Icon(Icons.remove_circle_outline)
+          icon: const Icon(Icons.remove_circle_outline)
         ),
         title: _cart.items[index].name.text.make(),
       ),
